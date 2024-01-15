@@ -29,6 +29,12 @@
       ],
       "@lib/exception/*": [
         "libs/exception/src/*"
+      ],
+      "@lib/database": [
+        "libs/database/src"
+      ],
+      "@lib/database/*": [
+        "libs/database/src/*"
       ]
     }
   }

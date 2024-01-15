@@ -1,9 +1,11 @@
 import { ProductNameException } from '@lib/exception';
+import { Column } from 'typeorm';
 
 export class ProductName {
   private static readonly MINIMUM_PRODUCT_NAME_LENGTH = 2;
   private static readonly MAXIMUM_PRODUCT_NAME_LENGTH = 30;
 
+  @Column()
   private readonly _value: string;
 
   private constructor(value: string) {

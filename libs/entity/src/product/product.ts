@@ -1,13 +1,37 @@
 import { Money, ProductName } from '@lib/entity';
-import { InvalidAuctionEndDateException, InvalidPricingException } from '@lib/exception';
+import {
+  InvalidAuctionEndDateException,
+  InvalidPricingException,
+} from '@lib/exception';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
+@Entity({ name: 'product' })
 export class Product {
+  @PrimaryGeneratedColumn()
   private _id: number;
+
+  @Column(() => ProductName, { prefix: false })
   private _name: ProductName;
+
+  @Column(() => Money, { prefix: false })
   private _startPrice: Money;
+
+  @Column(() => Money, { prefix: false })
   private _buyNowPrice: Money;
+
+  @Column()
   private _auctionEndDate: Date;
+
+  @CreateDateColumn()
   private _createdAt: Date;
+
+  @UpdateDateColumn()
   private _updatedAt: Date;
 
   constructor() {}

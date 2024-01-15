@@ -1,9 +1,11 @@
 import { InsufficientAmountException, InvalidDenominationException } from '@lib/exception';
+import { Column } from 'typeorm';
 
 export class Money {
   private static readonly MINIMUM_UNIT = 10;
   private static readonly MINIMUM_MONEY = 1000;
 
+  @Column()
   private readonly _value: number;
 
   private constructor(value: number) {
@@ -24,7 +26,7 @@ export class Money {
     }
   }
 
-  largerOrSameThan(other: Money):boolean {
+  largerOrSameThan(other: Money): boolean {
     return this.value >= other.value;
   }
 
