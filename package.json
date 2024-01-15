@@ -70,7 +70,8 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@lib/entity(|/.*)$": "<rootDir>/libs/entity/src/$1"
+      "^@lib/entity(|/.*)$": "<rootDir>/libs/entity/src/$1",
+      "^@lib/exception(|/.*)$": "<rootDir>/libs/exception/src/$1"
     }
   }
 }

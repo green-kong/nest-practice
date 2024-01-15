@@ -23,6 +23,12 @@
       ],
       "@lib/entity/*": [
         "libs/entity/src/*"
+      ],
+      "@lib/exception": [
+        "libs/exception/src"
+      ],
+      "@lib/exception/*": [
+        "libs/exception/src/*"
       ]
     }
   }
