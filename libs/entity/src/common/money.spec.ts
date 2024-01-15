@@ -32,4 +32,19 @@ describe('money 테스트', () => {
       Money.from(invalidValue);
     }).toThrow(new InvalidDenominationException(invalidValue));
   });
+
+  test.each([[2000, 1000, true],[1000, 1000, true],[1000, 2000, false],])(
+      '비교하는 Money보다 크거나 같은 경우 true를 반환한다.',
+      (value1: number, value2:number, expected:boolean) => {
+        // given
+        const money1 = Money.from(value1);
+        const money2 = Money.from(value2);
+
+        // when
+        const result = money1.largerOrSameThan(money2);
+        
+        // then
+        expect(result).toEqual(expected);
+      },
+    );
 });
