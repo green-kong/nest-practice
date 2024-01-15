@@ -24,6 +24,10 @@ export class Money {
     }
   }
 
+  largerOrSameThan(other: Money):boolean {
+    return this.value >= other.value;
+  }
+
   get value(): number {
     return this._value;
   }
