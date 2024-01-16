@@ -27,7 +27,8 @@
     "mysql2": "^3.7.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.19"
+    "typeorm": "^0.3.19",
+    "typeorm-naming-strategies": "^4.1.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -75,7 +76,8 @@
     "moduleNameMapper": {
       "^@lib/entity(|/.*)$": "<rootDir>/libs/entity/src/$1",
       "^@lib/exception(|/.*)$": "<rootDir>/libs/exception/src/$1",
-      "^@lib/database(|/.*)$": "<rootDir>/libs/database/src/$1"
+      "^@lib/database(|/.*)$": "<rootDir>/libs/database/src/$1",
+      "^@lib/infrastructure(|/.*)$": "<rootDir>/libs/infrastructure/src/$1"
     }
   }
 }

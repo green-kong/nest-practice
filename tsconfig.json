@@ -35,6 +35,12 @@
       ],
       "@lib/database/*": [
         "libs/database/src/*"
+      ],
+      "@lib/infrastructure": [
+        "libs/infrastructure/src"
+      ],
+      "@lib/infrastructure/*": [
+        "libs/infrastructure/src/*"
       ]
     }
   }

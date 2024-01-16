@@ -1,11 +1,14 @@
-import { InsufficientAmountException, InvalidDenominationException } from '@lib/exception';
+import {
+  InsufficientAmountException,
+  InvalidDenominationException,
+} from '@lib/exception';
 import { Column } from 'typeorm';
 
 export class Money {
   private static readonly MINIMUM_UNIT = 10;
   private static readonly MINIMUM_MONEY = 1000;
 
-  @Column()
+  @Column({ name: 'price' })
   private readonly _value: number;
 
   private constructor(value: number) {

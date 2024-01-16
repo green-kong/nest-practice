@@ -1,5 +1,5 @@
 import { TagNameLengthException } from '@lib/exception';
-import { Tag } from '@lib/entity/tag/tag';
+import { Tag } from '@lib/entity/tag/model/tag.entity';
 
 describe('tag 테스트', () => {
   it('tag를 생성한다.', () => {

@@ -14,27 +14,25 @@ import {
 @Entity({ name: 'product' })
 export class Product {
   @PrimaryGeneratedColumn()
-  private _id: number;
+  id: number;
 
   @Column(() => ProductName, { prefix: false })
-  private _name: ProductName;
+  name: ProductName;
 
-  @Column(() => Money, { prefix: false })
-  private _startPrice: Money;
+  @Column(() => Money, { prefix: 'start' })
+  startPrice: Money;
 
-  @Column(() => Money, { prefix: false })
-  private _buyNowPrice: Money;
+  @Column(() => Money, { prefix: 'buyNow' })
+  buyNowPrice: Money;
 
   @Column()
-  private _auctionEndDate: Date;
+  auctionEndDate: Date;
 
   @CreateDateColumn()
-  private _createdAt: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  private _updatedAt: Date;
-
-  constructor() {}
+  updatedAt: Date;
 
   static createNewProduct(
     name: string,
@@ -47,10 +45,10 @@ export class Product {
     const newBuyNowPrice = Money.from(buyNowPrice);
     this.validate(newStartPrice, newBuyNowPrice, auctionEndDate);
     const product = new Product();
-    product._name = newName;
-    product._startPrice = newStartPrice;
-    product._buyNowPrice = newBuyNowPrice;
-    product._auctionEndDate = auctionEndDate;
+    product.name = newName;
+    product.startPrice = newStartPrice;
+    product.buyNowPrice = newBuyNowPrice;
+    product.auctionEndDate = auctionEndDate;
     return product;
   }
 
@@ -81,33 +79,5 @@ export class Product {
 
   getBuyNowPriceValue(): number {
     return this.buyNowPrice.value;
-  }
-
-  get id(): number {
-    return this._id;
-  }
-
-  get name(): ProductName {
-    return this._name;
-  }
-
-  get startPrice(): Money {
-    return this._startPrice;
-  }
-
-  get buyNowPrice(): Money {
-    return this._buyNowPrice;
-  }
-
-  get auctionEndDate(): Date {
-    return this._auctionEndDate;
-  }
-
-  get createdAt(): Date {
-    return this._createdAt;
-  }
-
-  get updatedAt(): Date {
-    return this._updatedAt;
   }
 }
