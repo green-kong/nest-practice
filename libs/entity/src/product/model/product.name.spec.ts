@@ -1,4 +1,4 @@
-import { ProductName } from '@lib/entity/product/product.name';
+import { ProductName } from '@lib/entity/product/model/product.name';
 import { ProductNameException } from '@lib/exception';
 
 describe('productName 테스트', () => {

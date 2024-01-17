@@ -1,4 +1,4 @@
-import { Product } from '@lib/entity/product/product.entity';
+import { Product } from '@lib/entity/product/model/product.entity';
 import { InvalidAuctionEndDateException, InvalidPricingException } from '@lib/exception';
 
 describe('product 테스트', () => {
