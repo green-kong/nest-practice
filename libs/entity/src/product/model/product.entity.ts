@@ -7,9 +7,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ProductTag } from '@lib/entity/product/model/product.tag.entity';
 
 @Entity({ name: 'product' })
 export class Product {
@@ -28,6 +30,12 @@ export class Product {
   @Column()
   auctionEndDate: Date;
 
+  @OneToMany(() => ProductTag, (productCategory) => productCategory.product, {
+    cascade: true,
+    eager: true,
+  })
+  productCategories: ProductTag[];
+
   @CreateDateColumn()
   createdAt: Date;
 
@@ -39,6 +47,7 @@ export class Product {
     startPrice: number,
     buyNowPrice: number,
     auctionEndDate: Date,
+    productCategories: ProductTag[],
   ): Product {
     const newName = ProductName.from(name);
     const newStartPrice = Money.from(startPrice);
@@ -49,6 +58,7 @@ export class Product {
     product.startPrice = newStartPrice;
     product.buyNowPrice = newBuyNowPrice;
     product.auctionEndDate = auctionEndDate;
+    product.productCategories = productCategories;
     return product;
   }
 

@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeormConfig } from '@lib/database';
-import { Product } from '@lib/entity';
+import { Product, ProductTag } from '@lib/entity';
 import { cleanupDB } from '@lib/support';
 
 describe('TypeORM product 리포지토리 테스트', () => {
@@ -44,6 +44,7 @@ describe('TypeORM product 리포지토리 테스트', () => {
       startPrice,
       buyNowPrice,
       date,
+      [],
     );
 
     // when
@@ -68,6 +69,7 @@ describe('TypeORM product 리포지토리 테스트', () => {
       startPrice,
       buyNowPrice,
       date,
+      [],
     );
     const savedProduct = await productRepository.save(product);
 
@@ -78,8 +80,10 @@ describe('TypeORM product 리포지토리 테스트', () => {
     expect(savedProduct).toEqual(foundProduct);
   });
 
-  it('저장된 product를 id를 통해 삭제한다.', async () => {
+  it('product 저장 시 productCategory도 함께 저장된다.', async () => {
     // given
+    const productTag1 = ProductTag.from(1);
+    const productTag2 = ProductTag.from(2);
     const name = 'test';
     const startPrice = 10000;
     const buyNowPrice = 20000;
@@ -89,6 +93,30 @@ describe('TypeORM product 리포지토리 테스트', () => {
       startPrice,
       buyNowPrice,
       date,
+      [productTag1, productTag2],
+    );
+
+    // when
+    const savedProduct = await productRepository.save(product);
+
+    // then
+    expect(savedProduct.productCategories).toHaveLength(2);
+  });
+
+  it('저장된 product를 id를 통해 삭제한다.', async () => {
+    // given
+    const productTag1 = ProductTag.from(1);
+    const productTag2 = ProductTag.from(2);
+    const name = 'test';
+    const startPrice = 10000;
+    const buyNowPrice = 20000;
+    const date = new Date('2024-12-31');
+    const product = Product.createNewProduct(
+      name,
+      startPrice,
+      buyNowPrice,
+      date,
+      [productTag1, productTag2],
     );
     const savedProduct = await productRepository.save(product);
 
