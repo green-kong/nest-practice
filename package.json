@@ -77,7 +77,8 @@
       "^@lib/entity(|/.*)$": "<rootDir>/libs/entity/src/$1",
       "^@lib/exception(|/.*)$": "<rootDir>/libs/exception/src/$1",
       "^@lib/database(|/.*)$": "<rootDir>/libs/database/src/$1",
-      "^@lib/infrastructure(|/.*)$": "<rootDir>/libs/infrastructure/src/$1"
+      "^@lib/infrastructure(|/.*)$": "<rootDir>/libs/infrastructure/src/$1",
+      "^@lib/support(|/.*)$": "<rootDir>/libs/support/src/$1"
     }
   }
 }

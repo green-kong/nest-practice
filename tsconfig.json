@@ -41,6 +41,12 @@
       ],
       "@lib/infrastructure/*": [
         "libs/infrastructure/src/*"
+      ],
+      "@lib/support": [
+        "libs/support/src"
+      ],
+      "@lib/support/*": [
+        "libs/support/src/*"
       ]
     }
   }
