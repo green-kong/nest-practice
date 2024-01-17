@@ -43,4 +43,55 @@ describe('typeORM Tag 리포지토리 테스트', () => {
     expect(savedTag.id).toBeDefined();
     expect(savedTag.name).toEqual(name);
   });
+
+  it('같은 이름의 tag가 존재하는 경우 예외가 발생한다.', async () => {
+    // given
+    const name = 'test';
+    const tag = Tag.from(name);
+    await tagRepository.save(tag);
+
+    // when & then
+    const duplicatedNameTag = Tag.from(name);
+    await expect(tagRepository.save(duplicatedNameTag)).rejects.toThrow();
+  });
+
+  it('id를 통해 저장된 tag를 조회한다.', async () => {
+    // given
+    const name = 'test';
+    const tag = Tag.from(name);
+    const savedTag = await tagRepository.save(tag);
+
+    // when
+    const foundTag = await tagRepository.findById(savedTag.id);
+
+    // then
+    expect(foundTag).toEqual(savedTag);
+  });
+
+  it('name을 통해 저장된 tag를 조회한다.', async () => {
+    // given
+    const name = 'test';
+    const tag = Tag.from(name);
+    const savedTag = await tagRepository.save(tag);
+
+    // when
+    const foundTag = await tagRepository.findByName(name);
+
+    // then
+    expect(foundTag).toEqual(savedTag);
+  });
+
+  it('저장된 tag를 id를 통해 삭제한다.', async () => {
+    // given
+    const name = 'test';
+    const tag = Tag.from(name);
+    const savedTag = await tagRepository.save(tag);
+
+    // when
+    await tagRepository.deleteById(savedTag.id);
+    const foundTag = await tagRepository.findById(savedTag.id);
+
+    // then
+    expect(foundTag).toBeNull();
+  });
 });
