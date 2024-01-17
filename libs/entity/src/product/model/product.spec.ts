@@ -10,7 +10,7 @@ describe('product 테스트', () => {
     const auctionEndDate = new Date('2024-01-26');
 
     // when
-    const product = Product.createNewProduct(name, startPrice, buyNowPrice, auctionEndDate);
+    const product = Product.createNewProduct(name, startPrice, buyNowPrice, auctionEndDate,[]);
 
     // then
     expect(product.getNameValue()).toEqual(name);
@@ -28,7 +28,7 @@ describe('product 테스트', () => {
 
     // when & then
     expect(() => {
-      Product.createNewProduct(name, startPrice, buyNowPrice, auctionEndDate);
+      Product.createNewProduct(name, startPrice, buyNowPrice, auctionEndDate,[]);
     }).toThrow(new InvalidPricingException(startPrice, buyNowPrice));
   });
 
@@ -41,7 +41,7 @@ describe('product 테스트', () => {
 
     // when & then
     expect(() => {
-      Product.createNewProduct(name, startPrice, buyNowPrice, auctionEndDate);
+      Product.createNewProduct(name, startPrice, buyNowPrice, auctionEndDate,[]);
     }).toThrow(new InvalidAuctionEndDateException(auctionEndDate));
   });
 });
