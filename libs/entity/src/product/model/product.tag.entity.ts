@@ -12,7 +12,7 @@ export class ProductTag {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Product, (product: Product) => product.productCategories, {
+  @ManyToOne(() => Product, (product: Product) => product.productTags, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'productId' })

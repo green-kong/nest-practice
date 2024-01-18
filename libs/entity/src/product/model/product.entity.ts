@@ -1,7 +1,10 @@
-import { Money, ProductName } from '@lib/entity';
+import { Bid, Money, ProductName, ProductTag } from '@lib/entity';
 import {
+  ClosedAuctionProduct,
   InvalidAuctionEndDateException,
   InvalidPricingException,
+  ProductIdIsNotMatched,
+  SmallerThanMinimumBidPrice,
 } from '@lib/exception';
 import {
   Column,
@@ -11,7 +14,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ProductTag } from '@lib/entity/product/model/product.tag.entity';
 
 @Entity({ name: 'product' })
 export class Product {
@@ -34,7 +36,7 @@ export class Product {
     cascade: true,
     eager: true,
   })
-  productCategories: ProductTag[];
+  productTags: ProductTag[];
 
   @CreateDateColumn()
   createdAt: Date;
@@ -47,7 +49,7 @@ export class Product {
     startPrice: number,
     buyNowPrice: number,
     auctionEndDate: Date,
-    productCategories: ProductTag[],
+    productTags: ProductTag[],
   ): Product {
     const newName = ProductName.from(name);
     const newStartPrice = Money.from(startPrice);
@@ -58,7 +60,7 @@ export class Product {
     product.startPrice = newStartPrice;
     product.buyNowPrice = newBuyNowPrice;
     product.auctionEndDate = auctionEndDate;
-    product.productCategories = productCategories;
+    product.productTags = productTags;
     return product;
   }
 
@@ -76,6 +78,29 @@ export class Product {
     const now = new Date();
     if (auctionEndDate < now) {
       throw new InvalidAuctionEndDateException(auctionEndDate);
+    }
+  }
+
+  createBid(productId: number, price: number) {
+    const bidPrice = Money.from(price);
+    this.validateBidCreation(productId, bidPrice);
+    return Bid.create(productId, price);
+  }
+
+  private validateBidCreation(productId: number, bidPrice: Money) {
+    const now = new Date();
+    if (this.auctionEndDate < now) {
+      throw new ClosedAuctionProduct(this.id);
+    }
+    if (this.id !== productId) {
+      throw new ProductIdIsNotMatched(this.id, productId);
+    }
+
+    if (!bidPrice.largerOrSameThan(this.startPrice)) {
+      throw new SmallerThanMinimumBidPrice(
+        this.getStartPriceValue(),
+        bidPrice.value,
+      );
     }
   }
 

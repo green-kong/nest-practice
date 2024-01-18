@@ -9,8 +9,15 @@ export class TypeormTagRepository implements TagRepository {
     return await this.tags.save(tag);
   }
 
- async findById(id: number): Promise<Tag> {
+  async findById(id: number): Promise<Tag> {
     return await this.tags.findOneBy({ id });
+  }
+
+  async findAllByIds(ids: number[]): Promise<Tag[]> {
+    return await this.tags
+      .createQueryBuilder('tag')
+      .where('tag.id in :ids', { ids })
+      .getMany();
   }
 
   async findByName(name: string): Promise<Tag> {

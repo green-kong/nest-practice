@@ -100,7 +100,7 @@ describe('TypeORM product 리포지토리 테스트', () => {
     const savedProduct = await productRepository.save(product);
 
     // then
-    expect(savedProduct.productCategories).toHaveLength(2);
+    expect(savedProduct.productTags).toHaveLength(2);
   });
 
   it('저장된 product를 id를 통해 삭제한다.', async () => {

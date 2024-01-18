@@ -5,6 +5,8 @@ export interface TagRepository {
 
   findById(id: number): Promise<Tag>;
 
+  findAllByIds(ids: number[]): Promise<Tag[]>;
+
   findByName(name: string): Promise<Tag>;
 
   deleteById(id: number): Promise<void>;

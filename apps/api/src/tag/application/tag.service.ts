@@ -1,13 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Tag, TagRepository } from '@lib/entity';
-
-export class TagCreatDto {
-  name: string;
-
-  toTag(): Tag {
-    return Tag.from(this.name);
-  }
-}
+import { TagRepository } from '@lib/entity';
+import { TagCreatDto } from './dto/tagCreatDto';
 
 @Injectable()
 export class TagService {
@@ -19,7 +12,7 @@ export class TagService {
   async saveTag(tagCreateDto: TagCreatDto): Promise<number> {
     const tag = tagCreateDto.toTag();
     const foundTag = await this.tagRepository.findByName(tag.name);
-    if(foundTag) {
+    if (foundTag) {
       return foundTag.id;
     }
     const savedTag = await this.tagRepository.save(tag);
