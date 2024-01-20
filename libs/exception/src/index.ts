@@ -8,5 +8,6 @@ export * from './product/product.id.is.not.matched';
 export * from './product/smaller.than.minimum.bid.price';
 export * from './product/closed.auction.product';
 export * from './product/not.existed.product.exception';
+export * from './product/smaller.bid.pice.than.last.bid';
 
 export * from './tag/tag.name.length.exception';
